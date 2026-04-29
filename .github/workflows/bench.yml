@@ -40,7 +40,6 @@ jobs:
         if: github.event_name == 'issue_comment'
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.CLIENT_ISSUES_TOKEN }}
           script: |
             await github.rest.reactions.createForIssueComment({
               owner: context.repo.owner,
