@@ -4,7 +4,7 @@
 # Prerequisites:
 #   - A repository secret ENDPOINT_BENCH_TOKEN containing a PAT or
 #     GitHub App token with 'repo' scope on the endpoint repo
-#     (anyakushin/TrustTunnel).
+#     (anyakushin/TTE).
 name: Trigger Endpoint Benchmarks
 
 on:
@@ -16,7 +16,7 @@ on:
       endpoint_repo:
         description: "Endpoint repo (owner/name)"
         required: false
-        default: "anyakushin/TrustTunnel"
+        default: "anyakushin/TTE"
       endpoint_ref:
         description: "Endpoint branch/ref"
         required: false
@@ -61,7 +61,7 @@ jobs:
               clientRef = context.ref.replace('refs/heads/', '');
               clientRepo = `${context.repo.owner}/${context.repo.repo}`;
               prNumber = '';
-              endpointRepo = '${{ github.event.inputs.endpoint_repo }}' || 'anyakushin/TrustTunnel';
+              endpointRepo = '${{ github.event.inputs.endpoint_repo }}' || 'anyakushin/TTE';
               endpointRef = '${{ github.event.inputs.endpoint_ref }}' || 'master';
             } else {
               const pr = await github.rest.pulls.get({
@@ -72,7 +72,7 @@ jobs:
               clientRef = pr.data.head.ref;
               clientRepo = pr.data.head.repo.full_name;
               prNumber = String(context.issue.number);
-              endpointRepo = 'anyakushin/TrustTunnel';
+              endpointRepo = 'anyakushin/TTE';
               endpointRef = 'master';
             }
 
